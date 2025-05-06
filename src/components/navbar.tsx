@@ -1,11 +1,14 @@
 import MaxWidthWrapper from "@/components/max-witdth-wrapper";
 import { buttonVariants } from "@/components/ui/button";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-function Navbar() {
-  const user = undefined;
-  const isAdmin = false;
+async function Navbar() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
   return (
     <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur transition-all">
@@ -18,6 +21,12 @@ function Navbar() {
           <div className="h-full flex items-center space-x-4">
             {user ? (
               <>
+                <div className="cursor-default">
+                  <p>
+                    Welcome back,{" "}
+                    <span className="font-semibold text-yellow-500">{`${user.given_name} ${user.family_name}`}</span>
+                  </p>
+                </div>
                 <Link
                   href="/api/auth/logout"
                   className={buttonVariants({
@@ -29,7 +38,7 @@ function Navbar() {
                 </Link>
                 {isAdmin ? (
                   <Link
-                    href="/api/auth/logout"
+                    href="/dashboard"
                     className={buttonVariants({
                       size: "sm",
                       variant: "ghost",
