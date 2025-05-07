@@ -21,7 +21,7 @@ async function Navbar() {
           <div className="h-full flex items-center space-x-4">
             {user ? (
               <>
-                <div className="cursor-default">
+                <div className="cursor-default hidden md:block">
                   <p>
                     Welcome back,{" "}
                     <span className="font-semibold text-yellow-500">{`${user.given_name} ${user.family_name}`}</span>

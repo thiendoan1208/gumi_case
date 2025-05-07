@@ -2,6 +2,8 @@ import MaxWidthWrapper from "@/components/max-witdth-wrapper";
 import { Check, Star } from "lucide-react";
 import Image from "next/image";
 import Phone from "@/components/phone";
+import Icons from "@/components/icons";
+import Reviews from "@/components/reviews";
 
 export default function Home() {
   return (
@@ -123,6 +125,106 @@ export default function Home() {
             </div>
           </div>
         </MaxWidthWrapper>
+      </section>
+
+      {/* Value proposition section */}
+      <section className="bg-slate-100 py-24">
+        <MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-32">
+          <div className="flex flex-col lg:flex-row items-center gap-4 sm:gap-6">
+            <h2 className="order-1 mt-2 tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl text-gray-900">
+              What our{" "}
+              <span className="relative px-2">
+                customers{" "}
+                <Icons.underline className="hidden sm:block pointer-events-none absolute inset-x-0 -bottom-6 text-yellow-500" />
+              </span>{" "}
+              say
+            </h2>
+            <Image
+              src="/gumi-case-logo.png"
+              alt="logo"
+              width={100}
+              height={100}
+              className="w-24 order-0 lg:order-2 h-auto"
+            />
+          </div>
+
+          <div className="mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
+            <div className="flex flex-auto flex-col gap-4 lg:px-4 xl:px-10">
+              <div className="flex gap-0.5 mb-2">
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+              </div>
+              <div className="text-lg leading-8">
+                <p>
+                  &quot;The case feels durable and i even got a compliment on
+                  the design. Had the case for two and half of months now and{" "}
+                  <span className="p-0.5 bg-slate-800 text-white">
+                    The image is super clear
+                  </span>
+                  . Love it.&quot;
+                </p>
+              </div>
+              <div className="flex gap-4 mt-2">
+                <Image
+                  className="rounded-full h-12 w-12 object-cover"
+                  src="/users/user-1.png"
+                  alt="user"
+                  width={100}
+                  height={100}
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">David</p>
+                  <div className="flex gap-1.5 items-center text-zinc-600">
+                    <Check className="size-4 stroke-[3px] text-green-600" />
+                    <p className="text-sm">Verfied Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-auto flex-col gap-4 lg:px-4 xl:px-10">
+              <div className="flex gap-0.5 mb-2">
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+              </div>
+              <div className="text-lg leading-8">
+                <p>
+                  &quot;The case feels durable and i even got a compliment on
+                  the design. Had the case for two and half of months now and{" "}
+                  <span className="p-0.5 bg-slate-800 text-white">
+                    The image is super clear
+                  </span>
+                  . Love it.&quot;
+                </p>
+              </div>
+              <div className="flex gap-4 mt-2">
+                <Image
+                  className="rounded-full h-12 w-12 object-cover"
+                  src="/users/user-4.jpg"
+                  alt="user"
+                  width={100}
+                  height={100}
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">John</p>
+                  <div className="flex gap-1.5 items-center text-zinc-600">
+                    <Check className="size-4 stroke-[3px] text-green-600" />
+                    <p className="text-sm">Verfied Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </MaxWidthWrapper>
+
+        <div className="pt-16 flex  justify-center">
+          <Reviews />
+        </div>
       </section>
     </div>
   );
