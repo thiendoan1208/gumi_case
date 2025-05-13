@@ -1,5 +1,7 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { z } from "zod";
+import sharp from "sharp";
+import { db } from "@/db";
 
 const f = createUploadthing();
 
@@ -17,13 +19,41 @@ export const ourFileRouter = {
     },
   })
     .input(z.object({ configID: z.string().optional() }))
-    // Set permissions and file types fosr this FileRoute
+    // Set permissions and file types for this FileRoute
     .middleware(async ({ input }) => {
       return { input };
     })
-    .onUploadComplete(async ({ metadata }) => {
+    .onUploadComplete(async ({ metadata, file }) => {
       const { configID } = metadata.input;
-      return { configID };
+
+      const res = await fetch(file.url);
+      const buffer = await res.arrayBuffer();
+
+      const imgMetadata = await sharp(buffer).metadata();
+      const { width, height } = imgMetadata;
+
+      if (!configID) {
+        const configuration = await db.configuration.create({
+          data: {
+            imageUrl: file.url,
+            height: height || 500,
+            width: width || 500,
+          },
+        });
+
+        return { configID: configuration.id };
+      } else {
+        const updatedConfiguration = await db.configuration.update({
+          where: {
+            id: configID,
+          },
+          data: {
+            croppedImageUrl: file.url,
+          },
+        });
+
+        return { configID: updatedConfiguration.id };
+      }
     }),
 } satisfies FileRouter;
 

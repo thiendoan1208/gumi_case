@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { BadgeCheck } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const STEPS = [
@@ -58,7 +59,15 @@ function Steps() {
                       "text-zinc-700": isCurrent,
                     })}
                   >
-                    {step.name}
+                    <div className="flex items-center">
+                      <p>{step.name}</p>
+                      <BadgeCheck
+                        className={cn("size-5 mx-1", {
+                          "text-green-500": isCompleted,
+                          hidden: !isCompleted,
+                        })}
+                      />
+                    </div>
                   </span>
 
                   <span className="text-sm text-zinc-500 ">

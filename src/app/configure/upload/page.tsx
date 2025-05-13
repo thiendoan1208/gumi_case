@@ -35,9 +35,7 @@ function UploadPage() {
   };
 
   const onDropAccepted = (acceptedFile: File[]) => {
-    const splitName = acceptedFile[0].name.split(".");
-    const modifiedId = splitName[0] + Math.floor(Math.random() * 100000);
-    startUpload(acceptedFile, { configID: modifiedId });
+    startUpload(acceptedFile, { configID: undefined });
 
     setIsDragOver(false);
   };
