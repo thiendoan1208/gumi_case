@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
+import { ArrowRight, Check, ChevronsUpDown, LoaderCircle } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
 import { toast } from "sonner";
@@ -46,7 +46,7 @@ function DesignConfigurator({
 }: DesignConfiguratorProps) {
   const router = useRouter();
 
-  const { mutate: saveConfigData } = useMutation({
+  const { mutate: saveConfigData, isPending } = useMutation({
     mutationKey: ["save-config"],
     mutationFn: async (args: saveConfiguration) => {
       await Promise.all([saveConfiguration(), SaveConfig(args)]);
@@ -58,7 +58,7 @@ function DesignConfigurator({
       });
     },
     onSuccess: () => {
-      router.push(`configure/preview?id=${configID}`);
+      router.push(`/configure/preview?id=${configID}`);
     },
   });
 
@@ -398,6 +398,7 @@ function DesignConfigurator({
                 </p>
               </div>
               <Button
+                disabled={isPending}
                 onClick={() => {
                   saveConfigData({
                     configID,
@@ -410,8 +411,21 @@ function DesignConfigurator({
                 size="sm"
                 className="w-full cursor-pointer"
               >
-                <p>Continue</p>
-                <ArrowRight className="size-4 ml-1.5 inline" />
+                {isPending ? (
+                  <>
+                    <p>Loading...</p>
+                    <LoaderCircle
+                      className={cn("", {
+                        "animate-spin": isPending,
+                      })}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <p>Continue</p>
+                    <ArrowRight className="size-4 ml-1.5 inline" />
+                  </>
+                )}
               </Button>
             </div>
           </div>
