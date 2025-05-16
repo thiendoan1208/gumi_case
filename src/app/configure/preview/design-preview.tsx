@@ -6,10 +6,16 @@ import Phone from "@/components/phone";
 import { Configuration } from "@/generated/prisma";
 import { COLORS, MODELS } from "@/validators/option-validator";
 import { cn, formatPrice } from "@/lib/utils";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, LoaderCircle } from "lucide-react";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
+import { createCheckOutSession } from "@/app/configure/preview/action";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useState } from "react";
+import LoginModal from "@/components/login-modal";
 
 const Confetti = dynamic(() => import("react-confetti"), {
   ssr: false,
@@ -17,7 +23,10 @@ const Confetti = dynamic(() => import("react-confetti"), {
 
 function DesignPreview({ configuration }: { configuration: Configuration }) {
   const { width, height } = useWindowSize();
-  const { color, model, finish, material } = configuration;
+  const { id, color, model, finish, material } = configuration;
+  const { user } = useKindeBrowserClient();
+  const [isModalLoginOpen, setIsModalLoginOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const tw = COLORS.find(
     (supportedColor) => supportedColor.value === color
@@ -35,10 +44,34 @@ function DesignPreview({ configuration }: { configuration: Configuration }) {
     (phoneLabel) => phoneLabel.value === model
   )?.label;
 
-  const { mutate } = useMutation({
+  const { mutate: createPaymentSession, isPending } = useMutation({
     mutationKey: ["get-checkout-session"],
-    mutationFn: 
+    mutationFn: async ({ configID }: { configID: string }) => {
+      return await createCheckOutSession({ configID });
+    },
+    onSuccess: ({ url }) => {
+      if (url) {
+        router.push(url);
+      } else {
+        throw new Error("Unable to retrieve payment URL");
+      }
+    },
+    onError: () => {
+      toast.error("Something went wrong", {
+        description: "There was an error, please try again later.",
+      });
+    },
   });
+
+  const handleCheckout = () => {
+    if (user) {
+      createPaymentSession({ configID: id });
+    } else {
+      // need to login
+      localStorage.setItem("configurationId", id);
+      setIsModalLoginOpen(true);
+    }
+  };
   return (
     <>
       <div
@@ -54,6 +87,7 @@ function DesignPreview({ configuration }: { configuration: Configuration }) {
         />
       </div>
 
+      <LoginModal isOpen={isModalLoginOpen} setIsOpen={setIsModalLoginOpen} />
       <div className="mx-2 mt-20 grid grid-cols-1 text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
         <div className="sm:col-span-4 md:col-span-3 md:row-span-2 md:row-end-2">
           <div className="md:flex md:items-center md:justify-center">
@@ -140,11 +174,28 @@ function DesignPreview({ configuration }: { configuration: Configuration }) {
               </div>
 
               <div className="mt-8 flex justify-end pb-12">
-                <Button className="px-4 sm:px-6 lg:px-8 cursor-pointer">
-                  <div className="flex items-center">
-                    <p> Check out</p>{" "}
-                    <ArrowRight className="size-4 ml-1.5 translate-y-[1px]" />
-                  </div>{" "}
+                <Button
+                  disabled={isPending}
+                  onClick={() => {
+                    handleCheckout();
+                  }}
+                  className="px-4 sm:px-6 lg:px-8 cursor-pointer"
+                >
+                  {isPending ? (
+                    <div className="flex items-center justify-center">
+                      <p>Loading...</p>
+                      <LoaderCircle
+                        className={cn("ml-2", {
+                          "animate-spin": isPending,
+                        })}
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center">
+                      <p> Check out</p>{" "}
+                      <ArrowRight className="size-4 ml-1.5 translate-y-[1px]" />
+                    </div>
+                  )}
                 </Button>
               </div>
             </div>
