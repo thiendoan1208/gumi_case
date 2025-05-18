@@ -1,16 +1,11 @@
-import DesignConfigurator from "@/app/configure/design/design-configurator";
 import { db } from "@/db";
 import { notFound } from "next/navigation";
+import DesignConfigurator from "./design-configurator";
 
-interface PageProps {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}
+type PageProps = Promise<{ [key: string]: string | string[] | undefined }>;
 
-async function DesignPage({ searchParams }: PageProps) {
-  const resolvedSearchParams = await searchParams;
-  const { id } = resolvedSearchParams;
+const Page = async ({ searchParams }: { searchParams: PageProps }) => {
+  const { id } = await searchParams;
 
   if (!id || typeof id !== "string") {
     return notFound();
@@ -26,13 +21,13 @@ async function DesignPage({ searchParams }: PageProps) {
 
   const { imageUrl, width, height } = configuration;
 
-  return (<DesignConfigurator
-      imageURL={imageUrl}
+  return (
+    <DesignConfigurator
       configID={configuration.id}
       imageDimensions={{ width, height }}
+      imageURL={imageUrl}
     />
-    
   );
-}
+};
 
-export default DesignPage;
+export default Page;
