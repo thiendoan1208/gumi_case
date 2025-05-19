@@ -16,7 +16,7 @@ Project: GumiCase
 4\. UI Library
  - Shadcn/ui
  - Radix UI
- - Tailwind CSS
+ - Tailwind CSS (tailwindcss@4, @tailwindcss/postcss@4)
 
 5\. Database & ORM
 - Prisma (prisma@6.8.2, \@prisma/client@6.8.2)
