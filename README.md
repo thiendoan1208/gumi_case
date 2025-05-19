@@ -1,12 +1,19 @@
-Project: GumiCase Description: Create a custom case in just 5 minutes
+Project: GumiCase 
+Description: Create a custom case in just 5 minutes
+Visit: https://gumi-case.vercel.app
 
-1\. Framework Next.js (next@15.3.1)
+-- In this project: 
 
-2\. Authentication Kinde (@kinde-oss/kinde-auth-nextjs@2.6.1)
+1\. Framework
+  - Next.js (next@15.3.1)
 
-3\. Payment Stripe (stripe@18.1.0)
+2\. Authentication
+  - Kinde (@kinde-oss/kinde-auth-nextjs@2.6.1)
 
-4\. UI Library Shadcn/ui Radix UI Tailwind CSS (tailwindcss@4,
+3\. Payment 
+  - Stripe (stripe@18.1.0)
+
+4\. UI LibraryShadcn/ui Radix UI Tailwind CSS (tailwindcss@4,
 \@tailwindcss/postcss@4) Clsx (clsx@2.1.1) và Tailwind Merge
 (tailwind-merge@3.2.0)
 
