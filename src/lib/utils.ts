@@ -42,5 +42,6 @@ export function constructMetadata({
       creator: "@GumiCase",
     },
     icons,
+    metadataBase: new URL("https://gumi-case.vercel.app"),
   };
 }
