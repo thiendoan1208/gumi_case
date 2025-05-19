@@ -16,7 +16,7 @@ export const formatPrice = (price: number) => {
 };
 
 export function constructMetadata({
-  title = "GumiCase - Custom high quality cases",
+  title,
   description = "Create custom high quality phone in second",
   image = "/gumi-case-logo.png",
   icons = "/favion.ico",
@@ -27,7 +27,10 @@ export function constructMetadata({
   icons?: string;
 } = {}): Metadata {
   return {
-    title,
+    title: {
+      template: "%s | GumiCase",
+      default: "GumiCase - Custom high quality cases",
+    },
     description,
     openGraph: {
       title,

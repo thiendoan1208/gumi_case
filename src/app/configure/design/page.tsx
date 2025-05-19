@@ -1,8 +1,10 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
 import DesignConfigurator from "./design-configurator";
+import { Metadata } from "next";
 
 type PageProps = Promise<{ [key: string]: string | string[] | undefined }>;
+
 
 const Page = async ({ searchParams }: { searchParams: PageProps }) => {
   const { id } = await searchParams;

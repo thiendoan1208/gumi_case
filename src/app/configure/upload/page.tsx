@@ -3,6 +3,7 @@ import { Progress } from "@/components/ui/progress";
 import { useUploadThing } from "@/lib/uploadthing";
 import { cn } from "@/lib/utils";
 import { Images, Loader2, MousePointerSquareDashed } from "lucide-react";
+import { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import Dropzone, { FileRejection } from "react-dropzone";

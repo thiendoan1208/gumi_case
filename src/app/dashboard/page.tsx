@@ -19,8 +19,13 @@ import {
 import { db } from "@/db";
 import { formatPrice } from "@/lib/utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Admin dasboard for GumiCase",
+};
 async function Dashboard() {
   const WEEKLY_GOAL = 500;
   const MONTHLY_GOAL = 2000;

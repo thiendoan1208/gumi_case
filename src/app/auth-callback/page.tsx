@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { getAuthStatus } from "@/app/auth-callback/action";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Redireting",
+};
 
 const Page = () => {
   const [configId, setConfigId] = useState<string | null>(null);
