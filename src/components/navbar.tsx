@@ -1,6 +1,11 @@
 import MaxWidthWrapper from "@/components/max-witdth-wrapper";
 import { buttonVariants } from "@/components/ui/button";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+  getKindeServerSession,
+  LoginLink,
+  LogoutLink,
+  RegisterLink,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -27,7 +32,7 @@ async function Navbar() {
                     <span className="font-semibold text-yellow-500">{`${user.given_name} ${user.family_name}`}</span>
                   </p>
                 </div>
-                <Link
+                <LogoutLink
                   href="/api/auth/logout"
                   className={buttonVariants({
                     size: "sm",
@@ -35,7 +40,7 @@ async function Navbar() {
                   })}
                 >
                   Sign out
-                </Link>
+                </LogoutLink>
                 {isAdmin ? (
                   <Link
                     href="/dashboard"
@@ -60,7 +65,7 @@ async function Navbar() {
               </>
             ) : (
               <>
-                <Link
+                <RegisterLink
                   href="/api/auth/register"
                   className={buttonVariants({
                     size: "sm",
@@ -68,9 +73,9 @@ async function Navbar() {
                   })}
                 >
                   Sign up
-                </Link>
+                </RegisterLink>
 
-                <Link
+                <LoginLink
                   href="/api/auth/login"
                   className={buttonVariants({
                     size: "sm",
@@ -78,7 +83,7 @@ async function Navbar() {
                   })}
                 >
                   Login
-                </Link>
+                </LoginLink>
 
                 <div className="h-8 w-px bg-zinc-200 hidden sm:block"></div>
                 <Link
