@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Project: GumiCase Description: Create a custom case in just 5 minutes
 
-## Getting Started
+1\. Framework Next.js (next@15.3.1)
 
-First, run the development server:
+2\. Authentication Kinde (@kinde-oss/kinde-auth-nextjs@2.6.1)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+3\. Payment Stripe (stripe@18.1.0)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4\. UI Library Shadcn/ui Radix UI Tailwind CSS (tailwindcss@4,
+\@tailwindcss/postcss@4) Clsx (clsx@2.1.1) và Tailwind Merge
+(tailwind-merge@3.2.0)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5\. Database & ORM Prisma (prisma@6.8.2, \@prisma/client@6.8.2)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+6\. File Upload Uploadthing (uploadthing@7.7.2,
+\@uploadthing/react@7.3.1)
 
-## Learn More
+7\. State Management & Data Fetching Tanstack React Query
+(@tanstack/react-query@5.76.0)
 
-To learn more about Next.js, take a look at the following resources:
+8\. Animation & Effects Motion (motion@12.10.0) React Confetti
+(react-confetti@6.4.0) Lucide React (lucide-react@0.507.0)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+9\. Email Handling Resend (resend@4.5.1,
+\@react-email/components@0.0.41)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+10\. Additional UI Utilities Headless UI (@headlessui/react@2.2.2) React
+Dropzone (react-dropzone@14.3.8) React Rnd (react-rnd@10.5.2) React Use
+(react-use@17.6.0) Sonner (sonner@2.0.3)
 
-## Deploy on Vercel
+11\. Image Processing Sharp (sharp@0.32.6)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+12\. Validation Zod (zod@3.24.4)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+14\. Development Tools
+
+TypeScript (typescript@5) ESLint (eslint@9, eslint-config-next@15.3.1)
+Node.js Types (@types/node@20) React & React DOM Types (@types/react@19,
+\@types/react-dom@19)
